@@ -1,0 +1,46 @@
+name: Run Tests on BrowserStack
+
+on:
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Browser to run the tests on (e.g., chrome, firefox, edge)'
+        required: true
+      os:
+        description: 'Operating System (e.g., Windows, OS X, Android)'
+        required: true
+      os_version:
+        description: 'OS Version (e.g., 10, Big Sur)'
+        required: true
+      browser_version:
+        description: 'Browser Version (e.g., latest, 91)'
+        required: false
+        default: 'latest'
+
+jobs:
+  browserstack-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests on BrowserStack
+        env:
+          BROWSER: ${{ github.event.inputs.browser }}
+          OS: ${{ github.event.inputs.os }}
+          OS_VERSION: ${{ github.event.inputs.os_version }}
+          BROWSER_VERSION: ${{ github.event.inputs.browser_version }}
+          BSTACK_USERNAME: ${{ secrets.BSTACK_USERNAME }}
+          BSTACK_ACCESS_KEY: ${{ secrets.BSTACK_ACCESS_KEY }}
+        run: |
+          echo "Running tests on BrowserStack"
+          npm test

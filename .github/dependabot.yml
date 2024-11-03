@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "bundler"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "daily" # Check for updates daily
+    open-pull-requests-limit: 10
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "ruby"
+
+  - package-ecosystem: "github-actions"
+    directory: "/" # Location of GitHub Actions workflows
+    schedule:
+      interval: "daily" # Check for updates daily
+    open-pull-requests-limit: 10
+    rebase-strategy: "auto"
+    labels:
+      - "dependencies"
+      - "github-actions"

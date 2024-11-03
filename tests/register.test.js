@@ -7,10 +7,14 @@ describe('Register Tests', function () {
   let driver;
   let registerPage;
 
-  before(async () => {
-    driver = await buildDriver();
-    registerPage = new RegisterPage(driver);
+  before(async function () {
+    this.timeout(30000); // Increase timeout for Selenium operations
+    const browser = process.env.BROWSER || 'chrome'; // Default to Chrome
+    driver = await buildDriver(browser);
+    loginPage = new LoginPage(driver);
+    dashboardPage = new DashboardPage(driver);
   });
+  
 
   after(async () => {
     await driver.quit();
@@ -21,6 +25,8 @@ describe('Register Tests', function () {
     await registerPage.setUsername('newuser');
     await registerPage.setPassword('newpassword');
     await registerPage.submit();
+
+    // Wait and check for the success message
     const successMessage = await registerPage.getSuccessMessage();
     expect(successMessage).to.equal('Registration successful! You can now log in.');
   });
@@ -30,6 +36,8 @@ describe('Register Tests', function () {
     await registerPage.setUsername('existinguser');
     await registerPage.setPassword('password123');
     await registerPage.submit();
+
+    // Wait and check for the error message
     const errorMessage = await registerPage.getErrorMessage();
     expect(errorMessage).to.equal('User already exists');
   });
