@@ -1,0 +1,19 @@
+{
+  "name": "selenium-pojo-testing",
+  "version": "1.0.0",
+  "description": "Selenium testing for Login, Register, and Dashboard using POJO",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js"
+  },
+  "dependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.2.0",
+    "selenium-webdriver": "^4.14.0"
+  },
+  "devDependencies": {
+    "@types/supertest": "^2.0.11"
+  },
+  "author": "",
+  "license": "ISC"
+}
