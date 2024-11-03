@@ -13,7 +13,7 @@ This repository contains Selenium tests using the Page Object Model (POJO) appro
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git@github.com:clim-bot/selenium-pojo-testing.git
    cd selenium-pojo-testing
    ```
 
